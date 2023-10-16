@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// @ts-nocheck
 import { inject } from "vue";
 import { Sprite, Assets, Application, ICanvas } from "pixi.js";
 import Img from "../assets/bg.jpg";
