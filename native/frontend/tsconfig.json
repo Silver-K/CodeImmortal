@@ -14,7 +14,17 @@
       "ESNext",
       "DOM"
     ],
-    "skipLibCheck": true
+    "paths": {
+      "@/*": ["./src/*"],
+      "@composables/*": ["./src/composables/*"],
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@types": ["./src/types/index.ts"],
+      "@types/*": ["./src/types/*"],
+      "@shared": ["./src/shared/index.ts"],
+      "@shared/*": ["./src/shared/*"],
+    },
+    "skipLibCheck": true,
   },
   "include": [
     "src/**/*.ts",
@@ -22,6 +32,9 @@
     "src/**/*.tsx",
     "src/**/*.vue"
   ],
+  "ts-node": {
+    "esm": true
+  },
   "references": [
     {
       "path": "./tsconfig.node.json"
