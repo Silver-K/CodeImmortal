@@ -1,5 +1,6 @@
 /native/frontend/node_modules/
-/native/frontend/dist/
 *.log
 *.exe
 node_modules
+/native/build/bin/
+/native/frontend/dist/
