@@ -2,7 +2,8 @@ package main
 
 import (
 	"embed"
-	"github.com/Silver-K/CodeImmortal/core"
+	"github.com/Silver-K/CodeImmortal/core/battle"
+	"github.com/Silver-K/CodeImmortal/core/utils"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -14,8 +15,10 @@ var assets embed.FS
 
 func main() {
 	// Create an instance of the app structure
-	logger := core.NewLogger()
+	logger := utils.NewLogger()
 	app := NewApp(logger)
+
+	battleController := battle.NewController()
 
 	// Create application with options
 	err := wails.Run(&options.App{
@@ -28,6 +31,7 @@ func main() {
 		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
 		OnStartup:        app.startup,
 		Bind: []interface{}{
+			battleController,
 			app,
 		},
 	})
