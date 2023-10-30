@@ -1,18 +1,28 @@
 import { TickerCallback } from "pixi.js";
-import { onUnmounted } from "vue";
+import { onUnmounted, ref } from "vue";
+import { UsePixiT } from "./usePixi";
 
 type Cb = TickerCallback<any>;
 interface TickerCb {
   id?: string,
   callback: Cb,
 }
-export function useTicker(pixi: any) {
+export function useTicker(pixi: UsePixiT) {
+  const tickCount = ref(0);
   const ticker = pixi.ctx.ticker;
+
   const cbs: TickerCb[] = [];
+
   const add = (cb: TickerCb) => {
     if (pixi.inited) {
+      if (cb.id) {
+        remove(cb.id);
+      }
       ticker.add(cb.callback);
     } else {
+      if (cb.id) {
+        remove(cb.id);
+      }
       cbs.push(cb);
     }    
   }
@@ -36,7 +46,13 @@ export function useTicker(pixi: any) {
       }
     }
   }
+  const resetTick = () => {
+    tickCount.value = 0;
+  }
   pixi.afterMounted(() => {
+    ticker.add(() => {
+      tickCount.value += 1;
+    })
     cbs.forEach((cb) => {
       ticker.add(cb.callback);
     });    
@@ -47,7 +63,9 @@ export function useTicker(pixi: any) {
     });
   });
   return {
+    tickCount,
     add,
-    remove
+    remove,
+    resetTick
   }
 }

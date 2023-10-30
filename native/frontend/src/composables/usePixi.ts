@@ -3,6 +3,13 @@ import { useHooks } from "./useHooks";
 import { Ref, isRef, onMounted, unref } from "vue";
 import { VoidCb } from "@types";
 
+export interface UsePixiT {
+  ctx: Application,
+  mount: (el: HTMLElement | Ref<HTMLElement | null>) => void,
+  afterMounted: (cb: VoidCb) => void,
+  inited?: boolean,
+}
+
 const enum State {
   BEFORE_INIT,
   AFTER_INIT
@@ -41,7 +48,7 @@ export function usePixi(cfg?: Partial<IApplicationOptions>) {
       cb();
     }    
   }
-  const res = {
+  const res: UsePixiT = {
     ctx: app,
     mount,
     afterMounted,
