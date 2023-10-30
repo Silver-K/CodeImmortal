@@ -1,4 +1,4 @@
-package core
+package utils
 
 import "log"
 import "gopkg.in/natefinch/lumberjack.v2"

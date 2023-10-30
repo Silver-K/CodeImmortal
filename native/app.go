@@ -3,17 +3,17 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/Silver-K/CodeImmortal/core"
+	"github.com/Silver-K/CodeImmortal/core/utils"
 )
 
 // App struct
 type App struct {
 	ctx    context.Context
-	logger *core.Logger
+	logger *utils.Logger
 }
 
 // NewApp creates a new App application struct
-func NewApp(l *core.Logger) *App {
+func NewApp(l *utils.Logger) *App {
 	return &App{
 		logger: l,
 	}
