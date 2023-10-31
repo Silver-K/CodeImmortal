@@ -2,7 +2,7 @@ package main
 
 import (
 	"embed"
-	"github.com/Silver-K/CodeImmortal/core/battle"
+	"github.com/Silver-K/CodeImmortal/core"
 	"github.com/Silver-K/CodeImmortal/core/utils"
 
 	"github.com/wailsapp/wails/v2"
@@ -18,7 +18,7 @@ func main() {
 	logger := utils.NewLogger()
 	app := NewApp(logger)
 
-	battleController := battle.NewController()
+	game := &core.Game{}
 
 	// Create application with options
 	err := wails.Run(&options.App{
@@ -31,7 +31,7 @@ func main() {
 		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
 		OnStartup:        app.startup,
 		Bind: []interface{}{
-			battleController,
+			game,
 			app,
 		},
 	})
